@@ -3,9 +3,9 @@ import request from '@/utils/request'
 // 登录
 export function loginApi(params) {
   return request({
-    method: 'post',
-    url: '/user/login',
-    data: params
+    method: 'get',
+    url: '/api/Login/GetJwtToken',
+    params: params
   })
 }
 

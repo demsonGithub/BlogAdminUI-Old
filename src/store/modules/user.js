@@ -1,6 +1,6 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import Cookies from 'js-cookie'
-import { loginApi, getInfoApi } from '@/api/user'
+import { loginApi, getInfoApi } from '@/api/auth'
 
 export default {
   namespaced: true,
@@ -30,12 +30,16 @@ export default {
       // 将传过来的参数userinfo中需要的字段提取出来
       const { username, password, rememberMe } = userinfo
       return new Promise((resolve, reject) => {
-        let apiParams = { username: username.trim(), password: password }
+        let apiParams = { account: username.trim(), password: password }
+        console.log(apiParams)
         loginApi(apiParams)
           .then(response => {
             if (response == undefined) {
               resolve(null)
             }
+
+            console.log('1', response)
+
             const { code, data, message } = response
             if (code === 0) {
               resolve(message)

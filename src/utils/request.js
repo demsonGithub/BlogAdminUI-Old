@@ -4,8 +4,7 @@ import Config from '@/utils/website'
 import { ElMessage } from 'element-plus'
 
 const service = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'production' ? process.env.VUE_APP_BASE_API : '/',
+  baseURL: process.env.VUE_APP_BASE_API,
   // 设置请求时间
   timeout: Config.timeout
   //设置默认请求头

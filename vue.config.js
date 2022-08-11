@@ -15,7 +15,7 @@ module.exports = defineConfig({
   lintOnSave: false,
   transpileDependencies: true,
   devServer: {
-    port: 3001
+    port: 8080
   },
   configureWebpack: {
     plugins: [

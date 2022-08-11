@@ -6,7 +6,7 @@ function GVerify(options) {
     canvasId: 'verifyCanvas', //canvas的ID
     width: '100', //默认canvas宽度
     height: '30', //默认canvas高度
-    type: 'blend', //图形验证码默认类型blend:数字字母混合类型、number:纯数字、letter:纯字母
+    type: 'number', //图形验证码默认类型blend:数字字母混合类型、number:纯数字、letter:纯字母
     code: ''
   }
   if (Object.prototype.toString.call(options) == '[object Object]') {
@@ -87,7 +87,7 @@ GVerify.prototype = {
       ctx.translate(-x, -y)
     }
     /**绘制干扰线**/
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 1; i++) {
       ctx.strokeStyle = randomColor(40, 180)
       ctx.beginPath()
       ctx.moveTo(
