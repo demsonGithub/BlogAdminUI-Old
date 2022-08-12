@@ -58,8 +58,8 @@ export const asyncRoutes = [
         path: '/example/input',
         name: 'Input',
         component: () => import('@/views/example/input'),
-        meta: { title: 'Input', icon: 'input' }
-        // meta: { title: 'Input', icon: 'input', roles: ['admin'] }
+        // meta: { title: 'Input', icon: 'input' }
+        meta: { title: 'Input', icon: 'input', roles: ['管理员'] }
       }
     ]
   }

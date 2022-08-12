@@ -105,6 +105,7 @@ const loading = ref(false)
 
 const generateCode = () => {
   codeInfo.value = new GVerify('v_container')
+  loginForm.value.code = codeInfo.value.options.code
 }
 
 // 处理登录

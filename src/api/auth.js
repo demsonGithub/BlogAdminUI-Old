@@ -12,8 +12,8 @@ export function loginApi(params) {
 // 获取登录用户信息
 export function getInfoApi(params) {
   return request({
-    method: 'post',
-    url: '/user/getInfo',
-    data: { token: params }
+    method: 'get',
+    url: '/api/user/GetUserInfoByToken',
+    params
   })
 }

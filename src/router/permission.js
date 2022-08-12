@@ -12,7 +12,6 @@ router.beforeEach(async (to, from, next) => {
   // 设置网页标题
   //todo
   NProgress.start()
-
   if (getToken()) {
     //有token
     if (to.path === '/login') {
@@ -25,6 +24,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           const { roles } = await store.dispatch('user/getInfo', getToken())
+
           // 生成路由
           const accessRoutes = await store.dispatch(
             'permission/generateRoutes',

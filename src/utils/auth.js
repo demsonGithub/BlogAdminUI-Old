@@ -20,7 +20,7 @@ export function removeToken() {
 }
 //#endregion
 
-//#region 过滤路由(路由写在js中，通过mete.roles去过滤)
+//#region 过滤路由(路由写在js中，通过meta.roles去过滤)
 export function filterAsyncRoutes(routes, roles) {
   const res = []
 
@@ -36,7 +36,7 @@ export function filterAsyncRoutes(routes, roles) {
   return res
 }
 
-//根据mete中的role，判断是否有权限
+//根据meta中的role，判断是否有权限
 function hasPermission(roles, route) {
   if (route.meta && route.meta.roles) {
     return roles.some(role => route.meta.roles.includes(role))

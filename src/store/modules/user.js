@@ -31,14 +31,11 @@ export default {
       const { username, password, rememberMe } = userinfo
       return new Promise((resolve, reject) => {
         let apiParams = { account: username.trim(), password: password }
-        console.log(apiParams)
         loginApi(apiParams)
           .then(response => {
             if (response == undefined) {
               resolve(null)
             }
-
-            console.log('1', response)
 
             const { code, data, message } = response
             if (code === 0) {
@@ -59,18 +56,19 @@ export default {
     //#region 获取用户信息
     getInfo({ commit }, token) {
       return new Promise((resolve, reject) => {
-        getInfoApi(token)
+        let apiParams = { token: token }
+        getInfoApi(apiParams)
           .then(response => {
             const { data } = response
             if (!data) {
               reject('信息获取失败,请重新登录!')
             }
-            const { roles, name, avatar } = data
+            const { roles, nickName, avatar } = data
             if (!roles || roles.length <= 0) {
               reject('当前用户没有任何角色!')
             }
             commit('SET_ROLES', roles)
-            commit('SET_NAME', name)
+            commit('SET_NAME', nickName)
             commit('SET_AVATAR', avatar)
             resolve(data)
           })
