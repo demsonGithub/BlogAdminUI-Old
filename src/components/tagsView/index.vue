@@ -49,7 +49,6 @@ const tagsList = computed(() => {
 })
 
 const chooseTag = item => {
-  console.log(item)
   router.push({ path: item.path })
 }
 
@@ -105,11 +104,6 @@ const closeOther = () => {
 }
 
 const isHideTags = computed(() => {
-  console.log(
-    '1',
-    store.getters.tagsList.length,
-    store.getters.tagsList.length === 0
-  )
   return store.getters.tagsList.length === 0
 })
 

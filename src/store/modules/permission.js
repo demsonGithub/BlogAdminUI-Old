@@ -1,6 +1,6 @@
 import { constantRoutes, asyncRoutes } from '@/router/routes'
 import { filterAsyncRoutes, standardApiRoutes } from '@/utils/auth'
-import { getMenuByRoleApi } from '@/api/menu'
+import { getMenuByRoleApi } from '@/api/auth'
 
 export default {
   namespaced: true,

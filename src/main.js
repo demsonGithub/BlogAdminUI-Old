@@ -12,7 +12,8 @@ import '@/assets/styles/index.scss' // global css
 // 路由守卫
 import '@/router/permission'
 // 开启mock
-import '@/mock'
+// import '@/mock'
+
 const app = createApp(App)
 svgIcon(app)
 

@@ -62,5 +62,18 @@ export const asyncRoutes = [
         meta: { title: 'Input', icon: 'input', roles: ['管理员'] }
       }
     ]
+  },
+  {
+    path: '/TestExample',
+    component: Layout,
+    meta: { title: 'TestExample', icon: 'example' },
+    children: [
+      {
+        path: '/TestExample/index',
+        name: 'TestExample',
+        component: () => import('@/views/example/table'),
+        meta: { title: 'TestExample', icon: 'table' }
+      }
+    ]
   }
 ]

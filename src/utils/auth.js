@@ -53,11 +53,11 @@ export function standardApiRoutes(apiResultArray) {
   // component: { render: () => h(resolveComponent('router-view')) },
   apiResultArray.forEach(item => {
     res.push({
-      path: item.path,
-      name: item.name,
+      path: item.linkUrl,
+      name: item.menuName,
       component:
-        item.parentId === 0 ? Layout : () => import(`@/views${item.path}`),
-      meta: { title: item.name, icon: item.icon },
+        item.parentId == 0 ? Layout : () => import(`@/views${item.linkUrl}`),
+      meta: { title: item.menuName, icon: item.icon },
       children:
         item.children && item.children.length
           ? standardApiRoutes(item.children)
@@ -71,6 +71,18 @@ export function standardApiRoutes(apiResultArray) {
 // 添加路由
 export function appendRoutes(accessRoutes) {
   accessRoutes.forEach(item => {
+    // 如果是没有目录的菜单特殊处理
+    if (item.children.length == 0) {
+      item.component = () => import(`@/views${item.path}`)
+      const tempCatalog = {
+        path: '/',
+        component: Layout,
+        children: [item]
+      }
+      router.addRoute(tempCatalog)
+      return
+    }
+
     router.addRoute(item)
   })
   // 最后添加404页面
