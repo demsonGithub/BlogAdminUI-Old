@@ -27,9 +27,21 @@
   <el-card style="margin-top: 10px">
     <div>
       <el-button type="primary" @click="handleAddMenu">新增</el-button>
-      <el-button type="success" @click="handleUpdateMenu">修改</el-button>
-      <el-button type="danger" @click="handleDeleteMenu">删除</el-button>
-      <el-button type="warning">展开/折叠</el-button>
+      <el-button
+        type="success"
+        @click="handleUpdateMenu"
+        :disabled="updateDisable"
+      >
+        修改
+      </el-button>
+      <el-button
+        type="danger"
+        @click="handleDeleteMenu"
+        :disabled="deleteDisable"
+      >
+        删除
+      </el-button>
+      <el-button type="warning" @click="handExpandAll">展开/折叠</el-button>
     </div>
     <el-table
       ref="menuDataRef"
@@ -101,6 +113,7 @@
       @hide="hideAddMenuDialog"
     ></add-menu-dialog>
     <update-menu-dialog
+      v-if="!updateDisable"
       :updateMenuVisible="updateMenuVisible"
       :sourceMenuData="currentRow"
       @submit="updateMenu"
@@ -110,11 +123,12 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import {
   getMenuPermissionListApi,
   addMenuPermissionApi,
-  deleteMenuPermissionApi
+  deleteMenuPermissionApi,
+  updateMenuPermissionApi
 } from '@/api/menuPermission'
 import AddMenuDialog from './componment/addMenuDialog.vue'
 import updateMenuDialog from './componment/updateMenuDialog.vue'
@@ -135,11 +149,11 @@ const menuStateValue = ref('')
 
 const menuDataRef = ref()
 const menuData = ref([])
-const currentRow = ref({})
-
+const currentRow = ref()
+const isExpandAll = ref(false)
 //#endregion
 
-//#region 方法
+//#region formatter
 const formatterLinkType = val => {
   switch (val) {
     case 0:
@@ -159,6 +173,15 @@ const formatterStatus = val => {
     case 2:
       return '已删除'
   }
+}
+//#endregion
+
+const handleCurrentChange = val => {
+  currentRow.value = val
+}
+
+const handExpandAll = () => {
+  //todo
 }
 
 //#region 新增
@@ -190,22 +213,52 @@ const hideAddMenuDialog = () => {
 //#endregion
 
 //#region 删除
-const handleDeleteMenu = async () => {
-  let apiParams = currentRow.value.id
-  var result = await deleteMenuPermissionApi(apiParams)
-  getMenuPermissionList()
+const deleteDisable = computed(() => typeof currentRow.value == 'undefined')
+
+const handleDeleteMenu = () => {
+  ElMessageBox.confirm('确认删除吗？', '温馨提示', {
+    confirmButtonText: '删除',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(async () => {
+      let apiParams = currentRow.value.id
+      var result = await deleteMenuPermissionApi(apiParams)
+      getMenuPermissionList()
+    })
+    .catch(() => {})
 }
 //#endregion
 
 //#region 修改
+const updateDisable = computed(() => typeof currentRow.value == 'undefined')
+
 const updateMenuVisible = ref(false)
 // 弹出新增窗口
 const handleUpdateMenu = () => {
   updateMenuVisible.value = true
 }
 
-const updateMenu = parameter => {
-  console.log('todo', parameter)
+const updateMenu = async parameter => {
+  let apiParams = {
+    id: parameter.id,
+    parentId: parameter.parentMenu,
+    linkType: parameter.linkType,
+    name: parameter.menuName,
+    linkUrl: parameter.linkUrl,
+    icon: parameter.icon,
+    description: parameter.description,
+    sortNumber: parameter.sortNumber,
+    status: parameter.status
+  }
+  let result = await updateMenuPermissionApi(apiParams)
+
+  if (result.code == '00000') {
+    updateMenuVisible.value = false
+    getMenuPermissionList()
+  } else {
+    console.log(result)
+  }
 }
 
 const hideUpdateMenuDialog = () => {
@@ -213,12 +266,9 @@ const hideUpdateMenuDialog = () => {
 }
 //#endregion
 
+//#region 查询
 const handleSearch = () => {
   getMenuPermissionList()
-}
-
-const handleCurrentChange = val => {
-  currentRow.value = val
 }
 
 const getMenuPermissionList = params => {

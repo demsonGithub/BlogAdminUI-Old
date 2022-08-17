@@ -10,7 +10,7 @@
   >
     <el-form
       ref="addMenuFormRef"
-      :rules="addMenuRules"
+      :rules="MenuRules"
       :model="addMenuEntity"
       label-width="auto"
       label-position="right"
@@ -77,7 +77,7 @@ const addMenuEntity = ref({
   sortNumber: 0
 })
 
-const addMenuRules = ref({
+const MenuRules = ref({
   menuName: [{ required: true, message: '请输入菜单名称', trigger: 'change' }],
   linkUrl: [{ required: true, message: '请输入请求地址', trigger: 'change' }]
 })

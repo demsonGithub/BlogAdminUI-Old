@@ -35,3 +35,12 @@ export function deleteMenuPermissionApi(params) {
     data: params
   })
 }
+
+// 修改一个菜单或按钮
+export function updateMenuPermissionApi(params) {
+  return request({
+    method: 'post',
+    url: '/api/menuPermission/UpdateMenuPermission',
+    data: params
+  })
+}
