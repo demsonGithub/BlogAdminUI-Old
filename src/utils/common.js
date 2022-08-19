@@ -1,4 +1,4 @@
-import { getMenuListApi } from '@/api/menuPermission'
+import { getMenuListApi } from '@/api/menu-permission-api'
 
 // 获取树形菜单
 export async function getParentMenuData() {

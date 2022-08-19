@@ -46,8 +46,8 @@
     <el-table
       ref="menuDataRef"
       :data="menuData"
-      row-key="id"
       border
+      stripe
       highlight-current-row
       style="width: 100%; margin-top: 20px; margin-bottom: 20px"
       :row-style="{ height: '40px' }"
@@ -129,7 +129,7 @@ import {
   addMenuPermissionApi,
   deleteMenuPermissionApi,
   updateMenuPermissionApi
-} from '@/api/menuPermission'
+} from '@/api/menu-permission-api'
 import AddMenuDialog from './componment/addMenuDialog.vue'
 import updateMenuDialog from './componment/updateMenuDialog.vue'
 

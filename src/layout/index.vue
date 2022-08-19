@@ -22,7 +22,7 @@ import { useStore } from 'vuex'
 import sidebar from './sidebar'
 import navbar from './navbar'
 import appMain from './appMain'
-import tagsView from '@/components/tagsView'
+import tagsView from '@/components/TagsView'
 
 const store = useStore()
 

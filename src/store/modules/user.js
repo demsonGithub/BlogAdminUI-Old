@@ -1,7 +1,7 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import Cookies from 'js-cookie'
-import { loginApi } from '@/api/login'
-import { getInfoApi } from '@/api/auth'
+import { loginApi } from '@/api/login-api'
+import { getInfoApi } from '@/api/auth-api'
 
 export default {
   namespaced: true,
