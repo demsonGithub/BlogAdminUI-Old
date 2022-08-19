@@ -17,7 +17,7 @@
         />
       </el-select>
       <el-button type="success" style="margin: 0 30px 0 30px">搜索</el-button>
-      <el-button type="warning">重置</el-button>
+      <el-button type="warning">重置aa</el-button>
     </div>
   </el-card>
 </template>
